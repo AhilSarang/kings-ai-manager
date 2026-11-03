@@ -1,0 +1,39 @@
+# Production overlay for the always-on server.
+# On the server, .env sets COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+# so plain `docker compose ...` commands use both files.
+services:
+  api:
+    # Meta sends the verification token in the query string; don't log requests.
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips='*' --no-access-log"
+    security_opt: [no-new-privileges:true]
+
+  worker:
+    security_opt: [no-new-privileges:true]
+
+  db:
+    security_opt: [no-new-privileges:true]
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./ops/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api: { condition: service_healthy }
+    security_opt: [no-new-privileges:true]
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "5" }
+
+volumes:
+  caddy_data:
+  caddy_config:

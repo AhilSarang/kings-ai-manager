@@ -1,0 +1,27 @@
+{
+  "id": "18f2c3a4b5d6e7f8",
+  "threadId": "18f2c3a4b5d6e7f8",
+  "labelIds": ["INBOX", "CATEGORY_UPDATES", "UNREAD"],
+  "snippet": "Hello, We removed your listing for policy reasons &amp; need your action",
+  "internalDate": "1789600000000",
+  "payload": {
+    "mimeType": "multipart/alternative",
+    "headers": [
+      {"name": "Delivered-To", "value": "you@example.com"},
+      {"name": "Authentication-Results", "value": "mx.google.com;       dkim=pass header.i=@amazon.com header.s=rte02 header.b=Xy;       spf=pass (google.com: domain of 0101@amazonses.com designates 54.240.8.1 as permitted sender) smtp.mailfrom=0101@amazonses.com;       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=amazon.com"},
+      {"name": "From", "value": "Amazon Seller Performance <seller-performance@amazon.com>"},
+      {"name": "To", "value": "you@example.com"},
+      {"name": "Subject", "value": "Action required: listing removed for policy violation"},
+      {"name": "Date", "value": "Wed, 16 Sep 2026 22:13:20 +0000"},
+      {"name": "Message-ID", "value": "<0101abc@email.amazonses.com>"},
+      {"name": "Authentication-Results", "value": "spoofer.example; dkim=pass header.i=@amazon.com"}
+    ],
+    "body": {"size": 0},
+    "parts": [
+      {"partId": "0", "mimeType": "text/plain", "filename": "", "headers": [{"name": "Content-Type", "value": "text/plain; charset=UTF-8"}],
+       "body": {"size": 64, "data": "SGVsbG8sDQpXZSByZW1vdmVkIHlvdXIgbGlzdGluZyBCMDAxMjMgZm9yIHBvbGljeSByZWFzb25zLg0K"}},
+      {"partId": "1", "mimeType": "text/html", "filename": "", "headers": [{"name": "Content-Type", "value": "text/html; charset=UTF-8"}],
+       "body": {"size": 40, "data": "PHA-SGVsbG88L3A-"}}
+    ]
+  }
+}
